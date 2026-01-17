@@ -35,6 +35,7 @@ O sistema estará disponível em: `http://localhost:8069` (ou o IP do notebook n
 *   `/addons`: Pasta destinada a módulos personalizados ou da comunidade (OCA).
 *   `LICENSE_ANALYSIS.md`: Documento detalhado sobre as licenças LGPLv3 vs AGPLv3.
 *   `SITE_INTEGRATION_GUIDE.md`: Guia técnico para conectar o site [araujoefranca.com.br](https://araujoefranca.com.br/) ao CRM.
+*   `LEGAL_WORKFLOW_GUIDE.md`: Guia de customização de fluxos jurídicos, faturamento e segurança.
 
 ---
 
@@ -48,9 +49,9 @@ Conforme analisado, o uso do **Odoo Community (LGPLv3)** garante que:
 ---
 
 ## 📈 Próximos Passos
-- [ ] Configuração de Backup Automático do PostgreSQL.
-- [ ] Implementação de SSL (HTTPS) via Nginx Reverse Proxy.
-- [ ] Customização dos módulos de CRM e Faturamento para o fluxo do escritório.
+- [x] Configuração de Backup Automático do PostgreSQL (Implementado via container dedicado).
+- [x] Implementação de SSL (HTTPS) via Nginx Reverse Proxy (Configuração pronta em `./nginx`).
+- [x] Customização dos módulos de CRM e Faturamento para o fluxo do escritório (Guia em `LEGAL_WORKFLOW_GUIDE.md`).
 
 ---
 *Desenvolvido para o projeto de modernização do escritório.*

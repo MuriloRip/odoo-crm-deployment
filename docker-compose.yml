@@ -4,8 +4,9 @@ services:
     image: odoo:17.0
     depends_on:
       - db
-    ports:
-      - "8069:8069"
+    # Ports 8069 is now handled by nginx
+    expose:
+      - "8069"
     volumes:
       - odoo-web-data:/var/lib/odoo
       - ./config:/etc/odoo
@@ -25,6 +26,35 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
+    restart: always
+
+  db_backup:
+    image: prodrigestivill/postgres-backup-local
+    restart: always
+    volumes:
+      - ./backups:/backups
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo_password
+      - SCHEDULE=@daily
+      - BACKUP_KEEP_DAYS=7
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=6
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/certs:/etc/nginx/certs
+    depends_on:
+      - web
     restart: always
 
 volumes:
