@@ -54,4 +54,22 @@ Conforme analisado, o uso do **Odoo Community (LGPLv3)** garante que:
 - [x] Customização dos módulos de CRM e Faturamento para o fluxo do escritório (Guia em `LEGAL_WORKFLOW_GUIDE.md`).
 
 ---
+
+## 🧩 Como Adicionar Novos Módulos (Custom Addons)
+
+O Odoo é modular e seu pai pode adicionar novas funcionalidades (como módulos específicos para advocacia da OCA) seguindo estes passos:
+
+1.  **Baixe o Módulo:** Obtenha a pasta do módulo desejado (geralmente um arquivo .zip que você deve extrair).
+2.  **Mova para a Pasta Addons:** Coloque a pasta do módulo dentro do diretório `/addons` deste projeto.
+3.  **Reinicie o Sistema:** Execute o comando para o Odoo reconhecer os novos arquivos:
+    ```bash
+    docker-compose restart web
+    ```
+4.  **Ative no Painel:** 
+    *   Acesse o Odoo como Administrador.
+    *   Vá em **Configurações** e ative o **Modo Desenvolvedor**.
+    *   Vá no menu **Aplicativos** e clique em **Atualizar Lista de Aplicativos**.
+    *   Procure o novo módulo e clique em **Instalar**.
+
+---
 *Desenvolvido para o projeto de modernização do escritório.*
