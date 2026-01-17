@@ -45,6 +45,17 @@ services:
       - BACKUP_KEEP_WEEKS=4
       - BACKUP_KEEP_MONTHS=6
 
+  filestore_backup:
+    image: alpine:latest
+    restart: always
+    volumes:
+      - odoo-web-data:/var/lib/odoo:ro
+      - ./backups/filestore:/backups
+    command: >
+      sh -c "apk add --no-cache tar &&
+             echo '0 1 * * * tar -czf /backups/filestore_$(date +\%Y\%m\%d).tar.gz /var/lib/odoo' > /etc/crontabs/root &&
+             crond -f"
+
   nginx:
     image: nginx:latest
     ports:

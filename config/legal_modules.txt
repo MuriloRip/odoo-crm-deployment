@@ -8,3 +8,5 @@ Para transformar o Odoo em um sistema jurídico eficiente, instale os seguintes 
 4.  **Contacts:** Cadastro centralizado de clientes, juízes e partes contrárias.
 5.  **Project:** Gestão de processos judiciais (cada processo pode ser um "Projeto" com tarefas e prazos).
 6.  **Timesheet:** Controle de horas trabalhadas por caso (essencial para cobrança de honorários).
+
+7.  **L10n-Brazil (OCA):** Essencial para emissão de notas fiscais, boletos e conformidade fiscal brasileira. Requer a instalação dos módulos da OCA (l10n-brazil) na pasta `/addons`.
