@@ -1,6 +1,6 @@
-# Odoo CRM Deployment - Escritório Murilo Rip 👋
+# Odoo CRM Jurídico - Araújo & França Advocacia ⚖️
 
-Este repositório contém a infraestrutura completa e independente para a implantação do **Odoo CRM Community Edition**. O projeto foi estruturado para ser modular, seguro e fácil de manter, atendendo aos requisitos de hospedagem local (servidor de testes) e futura migração para a nuvem.
+Este repositório contém a infraestrutura completa e independente para a implantação do **Odoo CRM Community Edition**, customizado para as necessidades da **Araújo & França Advocacia**. O sistema foi projetado para centralizar a gestão de clientes, processos e documentos, integrando-se ao site oficial do escritório.
 
 ---
 
@@ -34,6 +34,7 @@ O sistema estará disponível em: `http://localhost:8069` (ou o IP do notebook n
 *   `/config`: Contém o arquivo `odoo.conf` para ajustes finos do sistema.
 *   `/addons`: Pasta destinada a módulos personalizados ou da comunidade (OCA).
 *   `LICENSE_ANALYSIS.md`: Documento detalhado sobre as licenças LGPLv3 vs AGPLv3.
+*   `SITE_INTEGRATION_GUIDE.md`: Guia técnico para conectar o site [araujoefranca.com.br](https://araujoefranca.com.br/) ao CRM.
 
 ---
 

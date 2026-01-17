@@ -1,0 +1,10 @@
+# Módulos Recomendados para Araújo & França Advocacia
+
+Para transformar o Odoo em um sistema jurídico eficiente, instale os seguintes módulos (disponíveis na versão Community):
+
+1.  **CRM:** Gestão de novos clientes e consultas iniciais.
+2.  **Calendar:** Agendamento de audiências, reuniões e prazos processuais.
+3.  **Documents:** Armazenamento de petições, contratos e documentos de clientes.
+4.  **Contacts:** Cadastro centralizado de clientes, juízes e partes contrárias.
+5.  **Project:** Gestão de processos judiciais (cada processo pode ser um "Projeto" com tarefas e prazos).
+6.  **Timesheet:** Controle de horas trabalhadas por caso (essencial para cobrança de honorários).
