@@ -73,7 +73,7 @@ def check_crm_module(models, uid):
         modules = models.execute_kw(
             ODOO_DB, uid, ODOO_PASSWORD,
             "ir.module.module", "search",
-            [["name", "=", "crm"], ["state", "=", "installed"]]
+            [[("name", "=", "crm"), ("state", "=", "installed")]]
         )
         return len(modules) > 0
     except Exception as e:
@@ -86,7 +86,7 @@ def get_default_team(models, uid):
         teams = models.execute_kw(
             ODOO_DB, uid, ODOO_PASSWORD,
             "crm.team", "search",
-            [["name", "=", "Sales"]],
+            [[("name", "=", "Sales")]],
             {"limit": 1}
         )
         
@@ -113,7 +113,7 @@ def delete_default_stages(models, uid, team_id):
         stages = models.execute_kw(
             ODOO_DB, uid, ODOO_PASSWORD,
             "crm.stage", "search",
-            [["team_id", "=", team_id]]
+            [[("team_id", "=", team_id)]]
         )
         
         if stages:
@@ -135,8 +135,6 @@ def create_stages(models, uid, team_id):
             stage_data = {
                 "name": stage["name"],
                 "sequence": stage["sequence"],
-                "probability": stage["probability"],
-                "description": stage["description"],
                 "team_id": team_id,
                 "fold": False,
             }
