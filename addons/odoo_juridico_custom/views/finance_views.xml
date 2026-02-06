@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_finance_transaction_tree_juridico" model="ir.ui.view">
+        <name>finance.transaction.tree.juridico</name>
+        <model>finance.transaction</model>
+        <arch type="xml">
+            <tree decoration-danger="transaction_type != 'honorario'" decoration-success="transaction_type == 'honorario'">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="transaction_type"/>
+                <field name="amount" sum="Total"/>
+                <field name="status" widget="badge" decoration-info="status == 'pending'" decoration-success="status == 'paid'"/>
+            </tree>
+        </arch>
+    </record>
+
+    <record id="action_finance_juridico" model="ir.actions.act_window">
+        <name>Financeiro Jurídico</name>
+        <res_model>finance.transaction</res_model>
+        <view_mode>tree,form</view_mode>
+    </record>
+
+    <menuitem id="menu_legal_finance_root" name="Financeiro Jurídico" sequence="15" web_icon="base.static/description/settings.png"/>
+    <menuitem id="menu_legal_transactions" name="Honorários e Despesas" parent="menu_legal_finance_root" action="action_finance_juridico" sequence="1"/>
+</odoo>

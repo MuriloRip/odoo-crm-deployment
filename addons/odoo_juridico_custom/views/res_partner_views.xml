@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_partner_form_inherit_finance" model="ir.ui.view">
-        <name>res.partner.form.inherit.finance</name>
+    <record id="view_partner_form_juridico_finance" model="ir.ui.view">
+        <name>res.partner.form.juridico.finance</name>
         <model>res.partner</model>
         <inherit_id ref="base.view_partner_form"/>
         <arch type="xml">
             <xpath expr="//notebook" position="inside">
-                <page string="Financeiro (Ganhos/Gastos)" name="finance_tab">
+                <page string="Financeiro Jurídico" name="legal_finance_tab">
                     <group>
                         <group>
-                            <field name="total_to_receive" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="total_honorarios" widget="monetary" string="Honorários a Receber"/>
                         </group>
                         <group>
-                            <field name="total_to_pay" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="total_despesas" widget="monetary" string="Despesas/Custas a Pagar"/>
                         </group>
                     </group>
                     <field name="transaction_ids">
-                        <tree editable="bottom" decoration-danger="transaction_type == 'expense'" decoration-success="transaction_type == 'income'">
+                        <tree editable="bottom">
                             <field name="date"/>
                             <field name="name"/>
                             <field name="transaction_type"/>

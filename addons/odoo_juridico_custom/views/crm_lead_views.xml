@@ -1,35 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Adicionar campos na visão de formulário -->
-    <record id="crm_lead_view_form_inherit_custom" model="ir.ui.view">
-        <name>crm.lead.view.form.inherit.custom</name>
+    <record id="crm_lead_view_form_juridico" model="ir.ui.view">
+        <name>crm.lead.view.form.juridico</name>
         <model>crm.lead</model>
         <inherit_id ref="crm.crm_lead_view_form"/>
         <arch type="xml">
+            <!-- Adicionar campos de processo no topo -->
             <xpath expr="//group[@name='lead_priority']" position="after">
-                <group>
+                <group string="Informações do Caso">
+                    <field name="process_number"/>
+                    <field name="court_name"/>
+                    <field name="legal_area"/>
                     <field name="custom_priority" widget="priority_selection"/>
                 </group>
             </xpath>
+            
+            <!-- Aba de Notas de Negociação -->
             <xpath expr="//notebook" position="inside">
-                <page string="Notas de Negociação" name="custom_notes_page">
-                    <field name="custom_notes" placeholder="Ex: esse cliente tem um fusca para quitar ou o filho dele ia casar..."/>
+                <page string="Notas de Negociação" name="juridico_notes">
+                    <field name="custom_notes" placeholder="Detalhes sobre o cliente, fusca, família, etc..."/>
                 </page>
             </xpath>
+
+            <!-- Botão WhatsApp no formulário -->
             <xpath expr="//field[@name='phone']" position="after">
                 <div class="o_row" invisible="not whatsapp_url">
                     <field name="whatsapp_url" invisible="1"/>
-                    <a t-att-href="record.whatsapp_url.value" target="_blank" class="btn btn-secondary btn-sm">
-                        <i class="fa fa-whatsapp" style="color: green;"/> WhatsApp
+                    <a t-att-href="record.whatsapp_url.value" target="_blank" class="btn btn-success btn-sm">
+                        <i class="fa fa-whatsapp"/> WhatsApp Jurídico
                     </a>
                 </div>
             </xpath>
         </arch>
     </record>
 
-    <!-- Adicionar botão de WhatsApp na visão Kanban -->
-    <record id="crm_case_kanban_view_leads_inherit_custom" model="ir.ui.view">
-        <name>crm.lead.kanban.view.inherit.custom</name>
+    <!-- Botão WhatsApp no Kanban -->
+    <record id="crm_case_kanban_view_leads_juridico" model="ir.ui.view">
+        <name>crm.lead.kanban.juridico</name>
         <model>crm.lead</model>
         <inherit_id ref="crm.crm_case_kanban_view_leads"/>
         <arch type="xml">
@@ -37,8 +44,11 @@
                 <div class="o_kanban_record_bottom" t-if="record.whatsapp_url.raw_value">
                     <div class="oe_kanban_bottom_left">
                         <a t-att-href="record.whatsapp_url.raw_value" target="_blank" class="btn btn-link btn-sm p-0">
-                            <i class="fa fa-whatsapp" style="color: green; font-size: 1.2em;"/>
+                            <i class="fa fa-whatsapp" style="color: #25D366; font-size: 1.3em;"/>
                         </a>
+                        <span class="text-muted ml-1" t-if="record.process_number.raw_value">
+                            <i class="fa fa-gavel"/> <field name="process_number"/>
+                        </span>
                     </div>
                 </div>
             </xpath>

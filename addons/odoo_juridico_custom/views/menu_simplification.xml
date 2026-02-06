@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Esconder menus que não fazem sentido para advocacia (Vendas/Produtos) -->
+    <!-- Nota: Isso requer o ID técnico dos menus. Vamos focar em simplificar a visão do CRM -->
+    
+    <record id="crm_lead_view_form_simplified" model="ir.ui.view">
+        <name>crm.lead.view.form.simplified</name>
+        <model>crm.lead</model>
+        <inherit_id ref="crm.crm_lead_view_form"/>
+        <arch type="xml">
+            <!-- Esconder campos de 'Receita Esperada' e 'Probabilidade' que podem ser irrelevantes no início -->
+            <xpath expr="//field[@name='expected_revenue']" position="attributes">
+                <attribute name="string">Valor Estimado da Causa</attribute>
+            </xpath>
+        </arch>
+    </record>
+</odoo>
