@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_non_client_transaction_tree" model="ir.ui.view">
+        <name>non.client.transaction.tree</name>
+        <model>non.client.transaction</model>
+        <arch type="xml">
+            <tree string="Transações de Contatos Externos" decoration-danger="transaction_type == 'cost'" decoration-success="transaction_type == 'gain'">
+                <field name="date"/>
+                <field name="partner_id"/>
+                <field name="name"/>
+                <field name="transaction_type"/>
+                <field name="amount" sum="Total"/>
+                <field name="status" widget="badge" decoration-info="status == 'pending'" decoration-success="status == 'paid'"/>
+            </tree>
+        </arch>
+    </record>
+
+    <record id="view_non_client_transaction_form" model="ir.ui.view">
+        <name>non.client.transaction.form</name>
+        <model>non.client.transaction</model>
+        <arch type="xml">
+            <form string="Transação">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id" domain="[('is_non_client', '=', True)]"/>
+                            <field name="name"/>
+                            <field name="amount"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="transaction_type"/>
+                            <field name="status"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notas">
+                            <field name="notes" placeholder="Detalhes da transação..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </arch>
+    </record>
+
+    <record id="view_non_client_transaction_search" model="ir.ui.view">
+        <name>non.client.transaction.search</name>
+        <model>non.client.transaction</model>
+        <arch type="xml">
+            <search>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <filter string="Ganhos" name="gains" domain="[('transaction_type', '=', 'gain')]"/>
+                <filter string="Custos" name="costs" domain="[('transaction_type', '=', 'cost')]"/>
+                <filter string="Pendentes" name="pending" domain="[('status', '=', 'pending')]"/>
+                <group expand="0" string="Agrupar Por">
+                    <filter string="Contato" name="group_by_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Data" name="group_by_date" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
+        </arch>
+    </record>
+</odoo>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- View de Busca Filtrada -->
+    <record id="view_res_partner_filter_non_client" model="ir.ui.view">
+        <name>res.partner.select.non.client</name>
+        <model>res.partner</model>
+        <inherit_id ref="base.view_res_partner_filter"/>
+        <arch type="xml">
+            <filter name="type_person" position="after">
+                <filter string="Contatos Externos" name="non_client" domain="[('is_non_client', '=', True)]"/>
+            </filter>
+        </arch>
+    </record>
+
+    <!-- Form View Customizada -->
+    <record id="view_partner_form_non_client" model="ir.ui.view">
+        <name>res.partner.form.non.client</name>
+        <model>res.partner</model>
+        <inherit_id ref="base.view_partner_form"/>
+        <arch type="xml">
+            <xpath expr="//sheet" position="before">
+                <div class="alert alert-info" role="alert" invisible="not is_non_client">
+                    Este é um <strong>Contato Externo</strong> gerenciado na seção de Ganhos/Custos.
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="is_non_client"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Gestão de Ganhos/Custos" name="non_client_management">
+                    <group>
+                        <group string="Resumo Financeiro">
+                            <field name="total_gains" widget="monetary"/>
+                            <field name="total_costs" widget="monetary"/>
+                            <field name="balance" widget="monetary" decoration-danger="balance &lt; 0" decoration-success="balance &gt; 0"/>
+                        </group>
+                        <group string="Anotações do ID (Compartilhadas)">
+                            <field name="shared_notes" nolabel="1" placeholder="Ex: Ah essa foi a pessoa que comprou o sofá aqui do escritório..."/>
+                        </group>
+                    </group>
+                    <separator string="Histórico de Transações"/>
+                    <field name="non_client_transaction_ids">
+                        <tree editable="bottom" decoration-danger="transaction_type == 'cost'" decoration-success="transaction_type == 'gain'">
+                            <field name="date"/>
+                            <field name="name"/>
+                            <field name="transaction_type"/>
+                            <field name="amount" sum="Total"/>
+                            <field name="status" widget="badge" decoration-info="status == 'pending'" decoration-success="status == 'paid'"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </arch>
+    </record>
+
+    <!-- Kanban View Simplificada -->
+    <record id="view_partner_kanban_non_client" model="ir.ui.view">
+        <name>res.partner.kanban.non.client</name>
+        <model>res.partner</model>
+        <arch type="xml">
+            <kanban class="o_res_partner_kanban" sample="1">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="balance"/>
+                <field name="is_non_client"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title"><field name="name"/></strong>
+                                <div>
+                                    <span>Saldo: </span>
+                                    <field name="balance" widget="monetary"/>
+                                </div>
+                                <div class="oe_kanban_footer">
+                                    <div class="o_kanban_record_bottom">
+                                        <div class="oe_kanban_bottom_left">
+                                            <field name="is_non_client" widget="boolean_favorite" nolabel="1"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </arch>
+    </record>
+</odoo>

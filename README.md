@@ -50,7 +50,9 @@ Acesse em: `http://seu-servidor:8069`
 *   `install.sh`: Script de instalação automatizado para Ubuntu (sem Docker).
 *   `backup.sh`: Script de backup automatizado para banco de dados e filestore.
 *   `/config`: Contém o arquivo `odoo.conf` para ajustes finos do sistema.
-*   `/addons`: Pasta destinada a módulos personalizados ou da comunidade (OCA).
+*   `/addons`: Pasta destinada a módulos personalizados.
+    *   `odoo_juridico_custom`: Módulo principal de CRM jurídico.
+    *   `odoo_non_client_management`: Novo módulo para gestão de contatos externos e transações avulsas.
 *   `LICENSE_ANALYSIS.md`: Documento detalhado sobre as licenças LGPLv3 vs AGPLv3.
 *   `SITE_INTEGRATION_GUIDE.md`: Guia técnico para conectar o site [araujoefranca.com.br](https://araujoefranca.com.br/) ao CRM.
 *   `LEGAL_WORKFLOW_GUIDE.md`: Guia de customização de fluxos jurídicos, faturamento e segurança.

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Ações -->
+    <record id="action_non_client_contacts" model="ir.actions.act_window">
+        <name>Contatos Externos</name>
+        <type>ir.actions.act_window</type>
+        <res_model>res.partner</res_model>
+        <view_mode>kanban,tree,form</view_mode>
+        <domain>[('is_non_client', '=', True)]</domain>
+        <context>{'default_is_non_client': True, 'search_default_non_client': 1}</context>
+        <help type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crie seu primeiro contato externo!
+            </p>
+            <p>
+                Gerencie pessoas que não são clientes formais, mas possuem transações financeiras.
+            </p>
+        </help>
+    </record>
+
+    <record id="action_non_client_transactions" model="ir.actions.act_window">
+        <name>Todas as Transações</name>
+        <type>ir.actions.act_window</type>
+        <res_model>non.client.transaction</res_model>
+        <view_mode>tree,form</view_mode>
+        <help type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Registre uma nova transação.
+            </p>
+        </help>
+    </record>
+
+    <!-- Menus -->
+    <!-- Menu Raiz (Aparece no App Switcher) -->
+    <menuitem id="menu_non_client_root"
+              name="Gestão de Contatos"
+              web_icon="base,static/description/icon.png"
+              sequence="20"/>
+
+    <menuitem id="menu_non_client_contacts"
+              name="Contatos Externos"
+              parent="menu_non_client_root"
+              action="action_non_client_contacts"
+              sequence="10"/>
+
+    <menuitem id="menu_non_client_transactions"
+              name="Financeiro"
+              parent="menu_non_client_root"
+              action="action_non_client_transactions"
+              sequence="20"/>
+</odoo>
