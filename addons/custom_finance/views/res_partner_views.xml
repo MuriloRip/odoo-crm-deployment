@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_inherit_finance" model="ir.ui.view">
+        <name>res.partner.form.inherit.finance</name>
+        <model>res.partner</model>
+        <inherit_id ref="base.view_partner_form"/>
+        <arch type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Financeiro (Ganhos/Gastos)" name="finance_tab">
+                    <group>
+                        <group>
+                            <field name="total_to_receive" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                        <group>
+                            <field name="total_to_pay" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                    </group>
+                    <field name="transaction_ids">
+                        <tree editable="bottom" decoration-danger="transaction_type == 'expense'" decoration-success="transaction_type == 'income'">
+                            <field name="date"/>
+                            <field name="name"/>
+                            <field name="transaction_type"/>
+                            <field name="amount"/>
+                            <field name="status"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </arch>
+    </record>
+</odoo>
