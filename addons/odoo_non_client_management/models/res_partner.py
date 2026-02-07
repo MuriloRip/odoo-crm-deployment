@@ -4,7 +4,16 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     is_non_client = fields.Boolean(string='É Contato Externo', default=False)
-    shared_notes = fields.Text(string='Anotações Compartilhadas', help='Anotações que aparecem para todos os usuários que acessarem este contato.')
+    shared_notes = fields.Html(string='Anotações Compartilhadas (ID Único)', help='Anotações ricas que aparecem para todos os usuários que acessarem este contato.')
+    last_interaction_date = fields.Date(string='Última Interação', compute='_compute_last_interaction', store=True)
+
+    @api.depends('non_client_transaction_ids.date')
+    def _compute_last_interaction(self):
+        for partner in self:
+            if partner.non_client_transaction_ids:
+                partner.last_interaction_date = max(partner.non_client_transaction_ids.mapped('date'))
+            else:
+                partner.last_interaction_date = False
     
     non_client_transaction_ids = fields.One2many('non.client.transaction', 'partner_id', string='Transações de Contato Externo')
     

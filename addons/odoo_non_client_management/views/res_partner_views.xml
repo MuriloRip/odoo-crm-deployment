@@ -34,8 +34,8 @@
                             <field name="total_costs" widget="monetary"/>
                             <field name="balance" widget="monetary" decoration-danger="balance &lt; 0" decoration-success="balance &gt; 0"/>
                         </group>
-                        <group string="Anotações do ID (Compartilhadas)">
-                            <field name="shared_notes" nolabel="1" placeholder="Ex: Ah essa foi a pessoa que comprou o sofá aqui do escritório..."/>
+                        <group string="Anotações Compartilhadas (ID Único)">
+                            <field name="shared_notes" nolabel="1" widget="html" placeholder="Ex: Ah essa foi a pessoa que comprou o sofá aqui do escritório..."/>
                         </group>
                     </group>
                     <separator string="Histórico de Transações"/>
