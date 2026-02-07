@@ -3,21 +3,23 @@ from odoo import models, fields, api
 class NonClientTransaction(models.Model):
     _name = 'non.client.transaction'
     _description = 'Transação de Contato Externo'
-    _order = 'date desc'
+    _order = 'date desc, id desc'
 
-    name = fields.Char(string='Descrição', required=True)
+    name = fields.Char(string='Descrição/Referência', required=True, help="Ex: Venda de Sofá, Pagamento de Consultoria")
     transaction_type = fields.Selection([
-        ('gain', 'Ganho'),
-        ('cost', 'Custo')
-    ], string='Tipo', required=True, default='gain')
+        ('gain', 'Ganho/Entrada'),
+        ('cost', 'Custo/Saída')
+    ], string='Tipo de Lançamento', required=True, default='gain')
     
-    amount = fields.Float(string='Valor', required=True)
-    date = fields.Date(string='Data', default=fields.Date.context_today)
-    partner_id = fields.Many2one('res.partner', string='Contato', required=True, ondelete='cascade')
+    amount = fields.Monetary(string='Valor', required=True, currency_field='currency_id')
+    currency_id = fields.Many2one('res.currency', string='Moeda', default=lambda self: self.env.company.currency_id)
+    
+    date = fields.Date(string='Data da Transação', default=fields.Date.context_today, required=True)
+    partner_id = fields.Many2one('res.partner', string='Contato Relacionado', required=True, ondelete='cascade', domain=[('is_non_client', '=', True)])
     
     status = fields.Selection([
-        ('pending', 'Pendente'),
+        ('pending', 'Pendente/Aberto'),
         ('paid', 'Liquidado/Pago')
-    ], string='Status', default='pending')
+    ], string='Situação', default='pending', required=True)
 
-    notes = fields.Text(string='Observações da Transação')
+    notes = fields.Html(string='Observações Detalhadas')

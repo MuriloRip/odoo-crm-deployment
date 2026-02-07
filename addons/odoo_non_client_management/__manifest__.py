@@ -1,16 +1,17 @@
 {
-    'name': 'Gestão de Contatos Não-Clientes',
-    'version': '1.0',
-    'category': 'Sales',
-    'summary': 'Gerenciamento de contatos externos, transações e anotações compartilhadas',
+    'name': 'Gestão de Contatos e Transações Externas',
+    'version': '1.2',
+    'category': 'Sales/CRM',
+    'summary': 'Gerenciamento de contatos, transações financeiras e anotações compartilhadas por ID',
     'description': """
-        Este módulo permite gerenciar pessoas que não são necessariamente clientes:
-        - Rastreamento de pagamentos (Ganhos e Custos).
-        - Anotações compartilhadas vinculadas ao contato.
-        - Interface simplificada e separada do CRM principal.
+        Módulo customizado para Araújo & França Advocacia:
+        - Gestão de contatos que não são clientes formais.
+        - Rastreamento de Ganhos e Custos avulsos.
+        - Anotações ricas (HTML) sincronizadas pelo ID do contato.
+        - Integração visual com CRM e Calendário.
     """,
-    'author': 'Manus',
-    'depends': ['base', 'contacts'],
+    'author': 'Manus AI',
+    'depends': ['base', 'contacts', 'crm', 'calendar'],
     'data': [
         'security/ir.model.access.csv',
         'views/res_partner_views.xml',
